@@ -1,4 +1,12 @@
 # 522Project
+## Installing requirements
+``requirements.txt`` contains all modules required for CPU only operation.
+Also install modules in ``requirements_gpu.txt`` (and do other pre-requisite GPU setup) for GPU acceleration.
+
+GPU accleration isn't strictly necessary, but can be used to speed up training the *autoencoder* and *t-SNE* transformation.
+The latter is benefits the most, as t-SNE calcluations are **very** slow, think kNN-scaling slow. If you want a t-SNE reduced representation of the data, I'd suggest decreasing the number of samples read in.
+
+## Pipeline
 1. Load Data
 2. Pre-process data
 3. Dimensionality reduction (user selectable)
