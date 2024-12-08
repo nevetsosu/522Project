@@ -63,3 +63,5 @@ Since we have context from the feature names and descriptions on Kaggle, we coul
 Some categories are label encoded despite atleast having numbers (i.e. version numbers like "1.23.456.7"). We could use orginal encoders instead for these. Unlike label encoders, ordinal encoding can preserve the order of value (i.e [low, medium, high] should be encoded exactly to [0, 1, 2] in that order). I think there's also a alternate approach for version numbers where we could just strip the periods, parse the remaining digitsto numbers. 
 
 There are some other categories that could benefit from the extra context of feature names and descriptions. But of course, this is a rather manual path to take. 
+
+Things to add: Cross-validation, random sampling (we're currently **always** taking the first one million points)
