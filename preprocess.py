@@ -13,6 +13,8 @@ def fill_missing(df):
     print('[PREPROCESS] Done filling missing data')
     return df
 
+# debug function for fill missing
+# not used currently
 def display_missing(df):
     print('[PREPROCESS] Displaying missing data:')
     for col in df.columns.tolist():
