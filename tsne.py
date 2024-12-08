@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
-from sklearn.manifold import TSNE
+# from sklearn.manifold import TSNE     # CPU tsne
+from cuml.manifold import TSNE          # GPU tsne
 
 # transforms the data X to 2-D using TSNE then graphs labeled by Y
 def display_tsne(X, Y):
@@ -7,8 +8,15 @@ def display_tsne(X, Y):
 
     # transform data
     print(f'[TSNE] Reducing dimensions to {COMPONENTS}')
-    tsne = TSNE(n_components=COMPONENTS, random_state=42)
+
+    # CPU tsne
+    # tsne = TSNE(n_components=COMPONENTS, random_state=42)
+    # X_tsne = tsne.fit_transform(X)s
+
+    # GPU tsne
+    tsne = TSNE(method='barnes_hut', perplexity=50, n_neighbors=150)
     X_tsne = tsne.fit_transform(X)
+
     print(f'[TSNE] Dimension reduced to {X_tsne.shape[1]}')
 
     # plot data
@@ -19,7 +27,5 @@ def display_tsne(X, Y):
     plt.ylabel('t-SNE 2')
     plt.title('2D t-SNE')
 
-    try:
-        plt.show()                      # for juypterlab/notebook
-    except:
-        plt.savefig('tnse.png')         # for terminal
+    plt.show()                      # for juypterlab/notebook
+    plt.savefig('tsne.png')         # for terminal
