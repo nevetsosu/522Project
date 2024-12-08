@@ -4,4 +4,4 @@ pandas
 scikit-learn
 matplotlib
 lightgbm
-cuml
+cuml-cu12
