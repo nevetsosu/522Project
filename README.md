@@ -45,7 +45,7 @@ We don't need sample_submission.csv or test.csv (though we could choose to do so
 
 The code expects it to be gzipped and named ``train.csv.gz``.
 Compressing it saves storage space, pandas inflates it back up in the code.
-Note that ``train.csv.gz`` is also already ignored by git so you don't accidentally push it up. 
+Note that ``train.csv.gz`` is also already ignored by git so you don't accidentally push it up.
 
 We can also take this further and pickle the dataframe object direct, then gz that (like the MNIST dataset) but I'll test that at a later time (and its not as important as other things).
 
