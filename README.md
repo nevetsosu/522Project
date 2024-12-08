@@ -10,7 +10,8 @@ The latter is benefits the most, as t-SNE calcluations are **very** slow, think 
 
 The Autoencoder should automatically detect the GPU once set up and utilize it.
 t-SNE requires the ``USEGPU`` environment variable to be set to use GPU. 
-This can be done with ``export USEGPU`` or with the use of a `.env` and the `dotenv` module. The latter is not implemented though.
+This can be done with ``export USEGPU=1``. It doesn't matter what USEGPU is actually set to, as long as it's set.
+We can also change this to work with the use of a `.env` and the `dotenv` module.
 
 ## Pipeline
 1. Load Data
