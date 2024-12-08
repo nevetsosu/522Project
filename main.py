@@ -62,7 +62,7 @@ def main():
         exit()
 
     # load data
-    X, Y = load('train.csv', nrows=1000000)
+    X, Y = load('train.csv.gz', nrows=1000000, compression='gzip')
 
     # construct and run pipeline
     TEST_SIZE = 0.2
