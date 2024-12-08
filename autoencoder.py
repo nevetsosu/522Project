@@ -36,7 +36,7 @@ class AutoEncoder:
         self.encoder.load_weights(self.E_PATH)
 
     def fit_transform(self, X, save=False, force_refit=False, **kwargs):
-        if os.path.exists(self.AE_PATH) and os.exists(self.E_PATH):
+        if os.path.exists(self.AE_PATH) and os.path.exists(self.E_PATH):
             print("[AUTOENCODER] Using loaded weights")
             self.load()
             if not force_refit:
