@@ -174,3 +174,6 @@ Makefile
 
 # ignore train.csv.gz
 train.csv.gz
+
+# ignore tsne image 
+tsne.png
