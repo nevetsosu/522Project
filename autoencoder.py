@@ -6,8 +6,8 @@ import os
 print("[AUTOENCODER] Num GPUs Available: ", len(tf.config.experimental.list_physical_devices('GPU')))
 
 class AutoEncoder:
-    AE_PATH = 'autoencoder.h5'
-    E_PATH = 'encoder.h5'
+    AE_PATH = 'autoencoder.weights.h5'
+    E_PATH = 'encoder.weights.h5'
 
     def __init__(self, input_dim: int, new_dim: int):
         self.autoencoder, self.encoder = self.build_autoencoder(input_dim, new_dim)
