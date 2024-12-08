@@ -1,33 +1,67 @@
+import sys
+
 # custom modules
 from loader import load
 from reduce import autoencode, pca, lda
-from preprocess import fill_missing, display_missing, encode, standardize
+from preprocess import default_preprocess
 from process import DTree, LGBM, RForest
 from tsne import display_tsne
 
+PREPROCESSORS = {
+    'default': default_preprocess,
+}
+
+DIM_REDUCTIONS = {
+    'lda': lda,
+    'pca': lambda X, Y=None: pca(X, n_components=0.95),
+    'autoencode': lambda X, Y=None: autoencode(X, n_components=51),
+}
+
+PROCESSORS = {
+    'decisiontree': DTree,
+    'lgbm': LGBM,
+    'randomforest': RForest
+}
+
+def pipeline(X, Y, test_size, preprocess: str, dim_reduce: str, process: str):
+    if preprocess not in PREPROCESSORS:
+        raise ValueError(f'{preprocess} is not a valid preprocessor\nChoose from: {PREPROCESSORS.keys()}' )
+    elif dim_reduce not in DIM_REDUCTIONS:
+        raise ValueError(f'{dim_reduce} is not a valid dimension reduction method\nChoose from: {DIM_REDUCTIONS.keys()}')
+    elif process not in PROCESSORS:
+        raise ValueError(f'{process} is not a valid processor\nChoose from: {PROCESSORS.keys()}')
+
+    preprocessor = PREPROCESSORS[preprocess]
+    dim_reducer = DIM_REDUCTIONS[dim_reduce]
+    processor = PROCESSORS[process]
+
+    print(f'Using preprocessor: {preprocess}')
+    print(f'Using dimensionality reduction method: {dim_reduce}')
+    print(f'Using processor: {process}')
+
+    X = preprocessor(X=X)
+    X = dim_reducer(X, Y)
+    processor(X, Y, test_size=test_size)
+
 def main():
+    if len(sys.argv) != 3:
+        print(f"{__file__} dim_reduce process")
+        exit()
+
+    # get parameters
+    _, dim_reduce, process = sys.argv
+
+    # load data
     TEST_SIZE = 0.2
     X, Y = load('train.csv', nrows=1000000)
 
-    # preprocess
-    X = fill_missing(X)         # fill NaNs
-    X = encode(X)               # categories -> numbers
-    X = standardize(X)          # standardization u=0, std=1
-
-    # tests without dimensionality reduction
-    DTree(X, Y, test_size=TEST_SIZE)
-    LGBM(X, Y, test_size=TEST_SIZE)
-    # test_RForest(X_scaled, Y, test_size=TEST_SIZE)
-
-    # Dimensionality reduction
-    # REDUCED_DIMS = 40
-    # X = autoencode(X, n_components=REDUCED_DIMS, save=True, force_refit=False, epochs=50, batch_size=256, shuffle=True)
-    # X = pca(X, n_components=0.95)
-    X = lda(X, Y)
-
-    # test post-dimensionality reduction
-    DTree(X, Y, test_size=TEST_SIZE)
-    LGBM(X, Y, test_size=TEST_SIZE)
+    # construct and run pipeline
+    pipeline(X, Y,
+        test_size=TEST_SIZE,
+        preprocess='default',
+        dim_reduce=dim_reduce,
+        process=process,
+    )
 
 
 if __name__ == '__main__':

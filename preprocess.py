@@ -40,3 +40,10 @@ def standardize(df):
     df_scaled = scaler.fit_transform(df)
     print('[PREPROCESS] Done standardizing features')
     return df_scaled
+
+# fill missing -> encode -> standardize
+def default_preprocess(X):
+    X = fill_missing(X)
+    X = encode(X)
+    X = standardize(X)
+    return X
