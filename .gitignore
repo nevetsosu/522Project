@@ -168,3 +168,6 @@ test.csv
 
 # ignore zip
 microsoft-malware-prediction.zip
+
+# ignore jupterlab Makefile
+Makefile
