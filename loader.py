@@ -89,10 +89,10 @@ dtypes = {
           'HasDetections':                                        'Int8'
     }
 
-def load(filepath='train.csv', nrows=1000000):
+def load(filepath='train.csv', nrows=1000000, **kwargs):
     print("[LOADER] Loading training data")
 
-    df = pd.read_csv(filepath, dtype=dtypes, nrows=nrows)
+    df = pd.read_csv(filepath, dtype=dtypes, nrows=nrows, **kwargs)
     df.drop(columns=INDEX, axis=1, inplace=True)                      # ignore machine identifier
     Y = df.pop(LABEL)
 
