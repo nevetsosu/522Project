@@ -9,7 +9,7 @@ def LGBM(X, Y, test_size, **kwargs):
     X_train, X_val, y_train, y_val = train_test_split(X, Y, test_size=test_size, random_state=42, **kwargs)
 
     # LightGBM model for standard scaled data
-    lgb_model_scaled = lgb.LGBMClassifier(random_state=42)
+    lgb_model_scaled = lgb.LGBMClassifier(n_jobs=-1, random_state=42)
     lgb_model_scaled.fit(X_train, y_train)
 
     # Make predictions on validation set
@@ -37,7 +37,7 @@ def RForest(X, Y, test_size, n_estimators=100, **kwargs):
     X_train, X_val, y_train, y_val = train_test_split(X, Y, test_size=test_size, random_state=42)
 
     # LightGBM model for standard scaled data
-    lgb_model_scaled = RandomForestClassifier(n_estimators, random_state=42, **kwargs)
+    lgb_model_scaled = RandomForestClassifier(n_estimators, n_jobs=-1, random_state=42, **kwargs)
     lgb_model_scaled.fit(X_train, y_train)
 
     # Make predictions on validation set
