@@ -171,3 +171,6 @@ microsoft-malware-prediction.zip
 
 # ignore jupterlab Makefile
 Makefile
+
+# ignore train.csv.gz
+train.csv.gz
