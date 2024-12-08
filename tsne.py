@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 from sklearn.manifold import TSNE
 
+# transforms the data X to 2-D using TSNE then graphs labeled by Y
 def display_tsne(X, Y):
     COMPONENTS = 2
 
