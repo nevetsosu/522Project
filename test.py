@@ -2,7 +2,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import roc_auc_score
-import matplotlib.pyplot as plt
 import lightgbm as lgb
 
 def test_LGBM(X, Y, test_size, **kwargs):
