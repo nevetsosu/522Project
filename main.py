@@ -1,6 +1,6 @@
 # custom modules
 from loader import load
-from autoencoder import AutoEncoder
+from reduce import autoencode
 from preprocess import fill_missing, display_missing, encode, standardize
 from test import test_DTree, test_LGBM, test_RForest
 from tsne import display_tsne
@@ -20,7 +20,7 @@ def main():
 
     # Dimensionality reduction
     REDUCED_DIMS = 40
-    X_low = AutoEncoder(X.shape[1], REDUCED_DIMS).fit_transform(X, save=True, force_refit=False, epochs=50, batch_size=256, shuffle=True)     # dimensionality reduction
+    X_low = autoencode(X, n_components=REDUCED_DIMS, save=True, force_refit=False, epochs=50, batch_size=256, shuffle=True)
 
     # test post-dimensionality reduction
     test_DTree(X_low, Y, test_size=0.2)
