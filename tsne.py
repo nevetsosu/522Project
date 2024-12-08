@@ -32,7 +32,9 @@ def _gpu_tsne(X):
 if os.getenv("USEGPU"):
     from cuml.manifold import TSNE
     _tsne = _gpu_tsne
+    print('[TSNE] Using GPU')
 else:
     from sklearn.manifold import TSNE
     _tsne = _cpu_tsne
+    print('[TSNE] Using CPU')
 
