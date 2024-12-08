@@ -1,9 +1,4 @@
 tensorflow[and-cuda]
-keras
-pandas
-scikit-learn
-matplotlib
-lightgbm
 
 # cuml-cu12 has specific instructions
 --extra-index-url https://pypi.nvidia.com
