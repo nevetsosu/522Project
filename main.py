@@ -14,7 +14,7 @@ PREPROCESSORS = {
 DIM_REDUCTIONS = {
     'lda': lda,
     'pca': lambda X, _: pca(X, n_components=0.95),                 # n_components is set arbitrarily for now
-    'autoencoder': lambda X, _: autoencode(X, n_components=51),     # n_components is set arbitrarily for now
+    'autoencoder': lambda X, _: autoencode(X, n_components=51, save=True),     # n_components is set arbitrarily for now
 }
 
 PROCESSORS = {
