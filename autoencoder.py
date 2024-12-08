@@ -46,10 +46,10 @@ class AutoEncoder:
         else:
             print("[AUTOENCODER] Fitting new weights")
 
-        with tf.device('gpu'):
-            self.autoencoder.fit(X, X, **kwargs)
-            if save:
-                print("[AUTOENCODER] Saving weights")
-                self.save()
+        # fit and/or save weights
+        self.autoencoder.fit(X, X, **kwargs)
+        if save:
+            print("[AUTOENCODER] Saving weights")
+            self.save()
 
-            return self.encoder.predict(X)
+        return self.encoder.predict(X)
