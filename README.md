@@ -65,3 +65,5 @@ Some categories are label encoded despite atleast having numbers (i.e. version n
 There are some other categories that could benefit from the extra context of feature names and descriptions. But of course, this is a rather manual path to take. 
 
 Things to add: Cross-validation, random sampling (we're currently **always** taking the first one million points)
+
+STEVNE: Make a python script that runs all permutations of preporcessing and Processing and stores to files  
