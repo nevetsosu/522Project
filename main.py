@@ -9,12 +9,13 @@ from tsne import display_tsne
 
 PREPROCESSORS = {
     'default': default_preprocess,
+    'none': lambda X: X,
 }
 
 DIM_REDUCTIONS = {
     'lda': lda,
-    'pca': lambda X, _: pca(X, n_components=0.95),                 # n_components is set arbitrarily for now
-    'autoencoder': lambda X, _: autoencode(X, n_components=51, save=True),     # n_components is set arbitrarily for now
+    'pca': lambda X, _: pca(X, n_components=0.95),                              # n_components is set arbitrarily for now
+    'autoencoder': lambda X, _: autoencode(X, n_components=53, save=True),      # n_components is set arbitrarily for now, the 53 here is what PCA usually chooses at 95%
 }
 
 PROCESSORS = {
@@ -110,6 +111,9 @@ def main():
     # load data
     X, Y = load('train.csv.gz', nrows=1000000, compression='gzip')
 
+    # go ahead and preprocess here to avoid reprocessing after each pipeline (we only have one preprocess method here)
+    X = default_preprocess(X) 
+
     TEST_SIZE = 0.2
     for i, (dim_reduce, process) in enumerate(pipelines, 1):
         print(f'[INFO] Starting Pipeline {i}: |{dim_reduce} {process}|')
@@ -117,7 +121,7 @@ def main():
         # construct and run pipeline
         (dim_1, auc_1), (dim_2, auc_2) = pipeline(X, Y,
             test_size=TEST_SIZE,
-            preprocess='default',
+            preprocess='none',
             dim_reduce=dim_reduce,
             process=process,
             show_tsne=show_tsne,
@@ -128,7 +132,6 @@ def main():
         print(f'[STAT] dim diff proportion: {(dim_2 - dim_1) / dim_1}')
         print(f'[STAT] auc diff proportion: {(auc_2 - auc_1) / auc_1}')
         print(f'[INFO] Pipeline {i} |{dim_reduce} {process}| finished.')
-
 
 if __name__ == '__main__':
     main()
