@@ -27,6 +27,7 @@ Currently, post-processing is just merged in with the process module. It's fine 
 2. Principal Component Analysis (PCA)
 3. Autoencoder
 4. Agglomerative Hierarchical Clustering
+5. t-SNE
 
 The autoencoder is currently reducing to an arbitrary dimension (51 I think). It isn't *completely* arbitrary though, 51 is around where PCA says atleast 95% of information is retained. 
 
