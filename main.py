@@ -57,6 +57,17 @@ def fail():
     print(f"{__file__}  dim_reduce1 process1 [dim_reduce2] [process2]... [show_tsne(true/false)]")
     exit()
 
+def print_stats(stat):
+    i, dim_reduce, process, dim_1, dim_2, auc_1, auc_2 = stat
+    dim_diff = (dim_2 - dim_1) / dim_1
+    auc_diff = (auc_2 - auc_1) / auc_1
+
+    print(f'[RESULT] full dim auc-score (dim={dim_1}): {auc_1}')
+    print(f'[RESULT] reduced dim auc-score (dim={dim_2}): {auc_2}')
+    print(f'[STAT] dim diff proportion: {dim_diff}')
+    print(f'[STAT] auc diff proportion: {auc_diff}')
+    print(f'[INFO] Pipeline {i} |{dim_reduce} {process}| finished.')
+
 def main():
     show_tsne = False
     dim_methods = []
@@ -112,7 +123,7 @@ def main():
     X, Y = load('train.csv.gz', nrows=1000000, compression='gzip')
 
     # go ahead and preprocess here to avoid reprocessing after each pipeline (we only have one preprocess method here)
-    X = default_preprocess(X) 
+    X = default_preprocess(X)
 
     TEST_SIZE = 0.2
     for i, (dim_reduce, process) in enumerate(pipelines, 1):
@@ -127,11 +138,8 @@ def main():
             show_tsne=show_tsne,
         )
 
-        print(f'[RESULT] full dim auc-score (dim={dim_1}): {auc_1}')
-        print(f'[RESULT] reduced dim auc-score (dim={dim_2}): {auc_2}')
-        print(f'[STAT] dim diff proportion: {(dim_2 - dim_1) / dim_1}')
-        print(f'[STAT] auc diff proportion: {(auc_2 - auc_1) / auc_1}')
-        print(f'[INFO] Pipeline {i} |{dim_reduce} {process}| finished.')
+        stat = (i, dim_reduce, process, dim_1, dim_2, auc_1, auc_2)
+        print_stats(stat)
 
 if __name__ == '__main__':
     main()
