@@ -1,6 +1,7 @@
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import roc_auc_score
 import lightgbm as lgb
 
@@ -41,5 +42,19 @@ def RForest(X, Y, test_size, n_estimators=100, **kwargs):
 
     # Make predictions on validation set
     y_pred_scaled = lgb_model_scaled.predict_proba(X_val)[:, 1]
+    auc_scaled = roc_auc_score(y_val, y_pred_scaled)
+    return auc_scaled
+
+
+def MLP(X, Y, test_size, hidden_layer_sizes=(100,), **kwargs):
+    print("[TEST] Testing MLP")
+    X_train, X_val, y_train, y_val = train_test_split(X, Y, test_size=test_size, random_state=42, **kwargs)
+
+    # Train MLP
+    mlp_model = MLPClassifier(hidden_layer_sizes=hidden_layer_sizes, random_state=42)
+    mlp_model.fit(X_train, y_train)
+
+    # Make predictions on validation set
+    y_pred_scaled = mlp_model.predict_proba(X_val)[:, 1]
     auc_scaled = roc_auc_score(y_val, y_pred_scaled)
     return auc_scaled
