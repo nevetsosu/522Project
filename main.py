@@ -2,9 +2,9 @@ import sys
 
 # custom modules
 from loader import load
-from reduce import autoencode, pca, lda
+from reduce import autoencode, pca, lda, cluster_reduce
 from preprocess import default_preprocess
-from process import DTree, LGBM, RForest
+from process import DTree, LGBM, RForest, MLP
 from tsne import display_tsne
 
 PREPROCESSORS = {
@@ -16,12 +16,14 @@ DIM_REDUCTIONS = {
     'lda': lda,
     'pca': lambda X, _: pca(X, n_components=0.95),                              # n_components is set arbitrarily for now
     'autoencoder': lambda X, _: autoencode(X, n_components=53, save=True),      # n_components is set arbitrarily for now, the 53 here is what PCA usually chooses at 95%
+    'hcluster': lambda X, _: cluster_reduce(X, n_components=53, linkage='ward')
 }
 
 PROCESSORS = {
     'decisiontree': DTree,
     'lgbm': LGBM,
-    'randomforest': RForest
+    'randomforest': RForest,
+    'mlp': MLP,
 }
 
 def pipeline(X, Y, test_size, preprocess: str, dim_reduce: str, process: str, show_tsne=False):
@@ -64,8 +66,8 @@ def print_stats(stat):
 
     print(f'[RESULT] full dim auc-score (dim={dim_1}): {auc_1}')
     print(f'[RESULT] reduced dim auc-score (dim={dim_2}): {auc_2}')
-    print(f'[STAT] dim diff proportion: {dim_diff}')
-    print(f'[STAT] auc diff proportion: {auc_diff}')
+    print(f'[STAT] dim diff proportion: {dim_diff * 100}%')
+    print(f'[STAT] auc diff proportion: {auc_diff * 100}%')
     print(f'[INFO] Pipeline {i} |{dim_reduce} {process}| finished.')
 
 def main():
