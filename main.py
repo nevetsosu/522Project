@@ -43,10 +43,14 @@ def pipeline(X, Y, test_size, preprocess: str, dim_reduce: str, process: str, sh
 
     # run pipeline
     X = preprocessor(X)
-    processor(X, Y, test_size=test_size)        # pre-dimension reduction results
+    dim_1 = X.shape[1]
+    auc_1 = processor(X, Y, test_size=test_size)        # pre-dimension reduction results
     X = dim_reducer(X, Y)
     if show_tsne: display_tsne(X, Y)
-    processor(X, Y, test_size=test_size)        # post-dimension reduction results
+    dim_2 = X.shape[1]
+    auc_2 = processor(X, Y, test_size=test_size)        # post-dimension reduction results
+
+    return (dim_1, auc_1), (dim_2, auc_2)
 
 def fail():
     print(f"{__file__}  dim_reduce1 process1 [dim_reduce2] [process2]... [show_tsne(true/false)]")
@@ -94,8 +98,8 @@ def main():
 
     # display pipeline info
     print(f'-----[INFO START]-----')
-    print(f'Attempting {(len(dim_methods))} pipelines.')
     print(f'show t-SNE: {show_tsne}')
+    print(f'Attempting {(len(dim_methods))} pipelines:')
 
     pipelines = list(zip(dim_methods, processors))
     for i, (dim_reduce, process) in enumerate(pipelines, 1):
@@ -111,14 +115,19 @@ def main():
         print(f'[INFO] Starting Pipeline {i}: |{dim_reduce} {process}|')
 
         # construct and run pipeline
-        pipeline(X, Y,
+        (dim_1, auc_1), (dim_2, auc_2) = pipeline(X, Y,
             test_size=TEST_SIZE,
             preprocess='default',
             dim_reduce=dim_reduce,
             process=process,
             show_tsne=show_tsne,
         )
-        print(f'[INFO] Pipeline |{dim_reduce} {process}| finished.')
+
+        print(f'[RESULT] full dim auc-score (dim={dim_1}): {auc_1}')
+        print(f'[RESULT] reduced dim auc-score (dim={dim_2}): {auc_2}')
+        print(f'[STAT] dim diff proportion: {(dim_2 - dim_1) / dim_1}')
+        print(f'[STAT] auc diff proportion: {(auc_2 - auc_1) / auc_1}')
+        print(f'[INFO] Pipeline {i} |{dim_reduce} {process}| finished.')
 
 
 if __name__ == '__main__':
