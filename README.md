@@ -24,8 +24,9 @@ Currently, post-processing is just merged in with the process module. It's fine 
 
 ## Dimensionality Reduction
 1. Linear Discriminant Analysis (lda)
-2. PCA (I dont remember the full name)
-3. Autoencoder 
+2. Principal Component Analysis (PCA)
+3. Autoencoder
+4. Agglomerative Hierarchical Clustering
 
 The autoencoder is currently reducing to an arbitrary dimension (51 I think). It isn't *completely* arbitrary though, 51 is around where PCA says atleast 95% of information is retained. 
 
@@ -33,6 +34,7 @@ The autoencoder is currently reducing to an arbitrary dimension (51 I think). It
 1. Decision Tree
 2. LightBGM
 3. RandomForest
+4. Multi-layer Perceptron (MLP)
 
 ## CLI Tool
 main.py acts as a CLI program. It allows you to invoke any combination of the dimensionalaity reduction methods with any classifier (also referred to as processors in the code, referring to the "processing" step). 
