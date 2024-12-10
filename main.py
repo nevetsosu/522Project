@@ -48,31 +48,77 @@ def pipeline(X, Y, test_size, preprocess: str, dim_reduce: str, process: str, sh
     if show_tsne: display_tsne(X, Y)
     processor(X, Y, test_size=test_size)        # post-dimension reduction results
 
+def fail():
+    print(f"{__file__}  dim_reduce1 process1 [dim_reduce2] [process2]... [show_tsne(true/false)]")
+    exit()
+
 def main():
     show_tsne = False
+    dim_methods = []
+    processors = []
+    all = False
 
     # get parameters
-    if len(sys.argv) == 3:
-        _, dim_reduce, process = sys.argv
-    elif len(sys.argv) == 4:
-        _, dim_reduce, process, show_tsne = sys.argv
-        show_tsne = show_tsne.lower() == 'true'
+    argc = len(sys.argv)
+    if argc == 1:
+        fail()
+    elif argc <= 3:                                       # handle "main all" and "main all true"
+        if sys.argv[1].lower() == 'all':
+            all = True
+            if argc == 3:
+                show_tsne = sys.argv[2] == 'true'
+    elif not all and not (argc % 2):
+        show_tsne = sys.argv[-1] == 'true'
+
+    # configure pipeline combinations
+    if not all:
+        # get configurations from argv
+        for i in range(1, argc - 1, 2):
+            d = sys.argv[i]
+            p = sys.argv[i + 1]
+            if DIM_REDUCTIONS.get(d, None) is None:
+                print(f'd is not a valid dimension reduction method')
+                exit()
+            if PROCESSORS.get(p, None) is None:
+                print(f'p is not a valid processor')
+                exit()
+
+            dim_methods.append(sys.argv[i])
+            processors.append(sys.argv[i + 1])
     else:
-        print(f"{__file__} dim_reduce process")
-        exit()
+        # enumerate all combinations
+        for dim_reduce in DIM_REDUCTIONS.keys():
+            for process in PROCESSORS.keys():
+                dim_methods.append(dim_reduce)
+                processors.append(process)
+
+    # display pipeline info
+    print(f'-----[INFO START]-----')
+    print(f'Attempting {(len(dim_methods))} pipelines.')
+    print(f'show t-SNE: {show_tsne}')
+
+    pipelines = list(zip(dim_methods, processors))
+    for i, (dim_reduce, process) in enumerate(pipelines, 1):
+        print(f"{i} |{dim_reduce} {process}|")
+
+    print('------[INFO END]------')
 
     # load data
     X, Y = load('train.csv.gz', nrows=1000000, compression='gzip')
 
-    # construct and run pipeline
     TEST_SIZE = 0.2
-    pipeline(X, Y,
-        test_size=TEST_SIZE,
-        preprocess='default',
-        dim_reduce=dim_reduce,
-        process=process,
-        show_tsne=show_tsne,
-    )
+    for i, (dim_reduce, process) in enumerate(pipelines, 1):
+        print(f'[INFO] Starting Pipeline {i}: |{dim_reduce} {process}|')
+
+        # construct and run pipeline
+        pipeline(X, Y,
+            test_size=TEST_SIZE,
+            preprocess='default',
+            dim_reduce=dim_reduce,
+            process=process,
+            show_tsne=show_tsne,
+        )
+        print(f'[INFO] Pipeline |{dim_reduce} {process}| finished.')
 
 
 if __name__ == '__main__':
