@@ -34,7 +34,7 @@ def DTree(X, Y, test_size, **kwargs):
 
 def RForest(X, Y, test_size, n_estimators=100, **kwargs):
     print("[TEST] Testing Random Forest")
-    X_train, X_val, y_train, y_val = train_test_split(X, Y, test_size=test_size, random_state=42)
+    X_train, X_val, y_train, y_val = train_test_split(X, Y, test_size=test_size, n_jobs=-1, random_state=42)
 
     # Random Forest model for standard scaled data
     rf_model_scaled = RandomForestClassifier(n_estimators, n_jobs=-1, random_state=42, **kwargs)
