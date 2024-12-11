@@ -1,0 +1,304 @@
+[AUTOENCODER] Num GPUs Available:  1
+[TSNE] Using CPU
+-----[INFO START]-----
+show t-SNE: False
+Attempting 16 pipelines:
+1 |lda decisiontree|
+2 |lda lgbm|
+3 |lda randomforest|
+4 |lda mlp|
+5 |pca decisiontree|
+6 |pca lgbm|
+7 |pca randomforest|
+8 |pca mlp|
+9 |autoencoder decisiontree|
+10 |autoencoder lgbm|
+11 |autoencoder randomforest|
+12 |autoencoder mlp|
+13 |hcluster decisiontree|
+14 |hcluster lgbm|
+15 |hcluster randomforest|
+16 |hcluster mlp|
+------[INFO END]------
+[LOADER] Loading training data
+[PREPROCESS] Filling missing data
+[PREPROCESS] Done filling missing data
+[PREPROCESS] Label encoding categorical features
+[PREPROCESS] Done label encoding categorical features
+[PREPROCESS] Standardizing features
+[PREPROCESS] Done standardizing features
+[INFO] Starting Pipeline 1: |lda decisiontree|
+[PIPELINE] Using preprocessor: none
+[PIPELINE] Using dimensionality reduction method: lda
+[PIPELINE] Using processor: decisiontree
+[TEST] Testing Decision Tree
+[REDUCE] Starting LDA
+[REDUCE] LDA reduced dimensionality to 1
+[TEST] Testing Decision Tree
+[RESULT] full dim auc-score (dim=81): 0.5729614934684598
+[RESULT] reduced dim auc-score (dim=1): 0.5469737256789491
+[STAT] dim diff proportion: -98.76543209876543%
+[STAT] auc diff proportion: -4.53569185464665%
+[INFO] Pipeline 1 |lda decisiontree| finished.
+[INFO] Starting Pipeline 2: |lda lgbm|
+[PIPELINE] Using preprocessor: none
+[PIPELINE] Using dimensionality reduction method: lda
+[PIPELINE] Using processor: lgbm
+[TEST] Testing LGBM
+[LightGBM] [Info] Number of positive: 399833, number of negative: 400167
+[LightGBM] [Info] Auto-choosing row-wise multi-threading, the overhead of testing was 0.232353 seconds.
+You can set `force_row_wise=true` to remove the overhead.
+And if memory is not enough, you can set `force_col_wise=true`.
+[LightGBM] [Info] Total Bins 5214
+[LightGBM] [Info] Number of data points in the train set: 800000, number of used features: 75
+[LightGBM] [Info] [binary:BoostFromScore]: pavg=0.499791 -> initscore=-0.000835
+[LightGBM] [Info] Start training from score -0.000835
+[REDUCE] Starting LDA
+[REDUCE] LDA reduced dimensionality to 1
+[TEST] Testing LGBM
+[LightGBM] [Info] Number of positive: 399833, number of negative: 400167
+[LightGBM] [Info] Auto-choosing col-wise multi-threading, the overhead of testing was 0.006960 seconds.
+You can set `force_col_wise=true` to remove the overhead.
+[LightGBM] [Info] Total Bins 255
+[LightGBM] [Info] Number of data points in the train set: 800000, number of used features: 1
+[LightGBM] [Info] [binary:BoostFromScore]: pavg=0.499791 -> initscore=-0.000835
+[LightGBM] [Info] Start training from score -0.000835
+[RESULT] full dim auc-score (dim=81): 0.71345124843805
+[RESULT] reduced dim auc-score (dim=1): 0.6700287851511515
+[STAT] dim diff proportion: -98.76543209876543%
+[STAT] auc diff proportion: -6.086255141043307%
+[INFO] Pipeline 2 |lda lgbm| finished.
+[INFO] Starting Pipeline 3: |lda randomforest|
+[PIPELINE] Using preprocessor: none
+[PIPELINE] Using dimensionality reduction method: lda
+[PIPELINE] Using processor: randomforest
+[TEST] Testing Random Forest
+[REDUCE] Starting LDA
+[REDUCE] LDA reduced dimensionality to 1
+[TEST] Testing Random Forest
+[RESULT] full dim auc-score (dim=81): 0.7029991872199675
+[RESULT] reduced dim auc-score (dim=1): 0.5828351013634041
+[STAT] dim diff proportion: -98.76543209876543%
+[STAT] auc diff proportion: -17.093061847163156%
+[INFO] Pipeline 3 |lda randomforest| finished.
+[INFO] Starting Pipeline 4: |lda mlp|
+[PIPELINE] Using preprocessor: none
+[PIPELINE] Using dimensionality reduction method: lda
+[PIPELINE] Using processor: mlp
+[TEST] Testing MLP
+[REDUCE] Starting LDA
+[REDUCE] LDA reduced dimensionality to 1
+[TEST] Testing MLP
+[RESULT] full dim auc-score (dim=81): 0.6991133820145353
+[RESULT] reduced dim auc-score (dim=1): 0.6701637416565497
+[STAT] dim diff proportion: -98.76543209876543%
+[STAT] auc diff proportion: -4.140907770148183%
+[INFO] Pipeline 4 |lda mlp| finished.
+[INFO] Starting Pipeline 5: |pca decisiontree|
+[PIPELINE] Using preprocessor: none
+[PIPELINE] Using dimensionality reduction method: pca
+[PIPELINE] Using processor: decisiontree
+[TEST] Testing Decision Tree
+[REDUCE] Starting PCA
+[REDUCE] PCA reduced dimensionality to 53
+[TEST] Testing Decision Tree
+[RESULT] full dim auc-score (dim=81): 0.5729614934684598
+[RESULT] reduced dim auc-score (dim=53): 0.5521432817857312
+[STAT] dim diff proportion: -34.5679012345679%
+[STAT] auc diff proportion: -3.6334399292183086%
+[INFO] Pipeline 5 |pca decisiontree| finished.
+[INFO] Starting Pipeline 6: |pca lgbm|
+[PIPELINE] Using preprocessor: none
+[PIPELINE] Using dimensionality reduction method: pca
+[PIPELINE] Using processor: lgbm
+[TEST] Testing LGBM
+[LightGBM] [Info] Number of positive: 399833, number of negative: 400167
+[LightGBM] [Info] Auto-choosing row-wise multi-threading, the overhead of testing was 0.228906 seconds.
+You can set `force_row_wise=true` to remove the overhead.
+And if memory is not enough, you can set `force_col_wise=true`.
+[LightGBM] [Info] Total Bins 5214
+[LightGBM] [Info] Number of data points in the train set: 800000, number of used features: 75
+[LightGBM] [Info] [binary:BoostFromScore]: pavg=0.499791 -> initscore=-0.000835
+[LightGBM] [Info] Start training from score -0.000835
+[REDUCE] Starting PCA
+[REDUCE] PCA reduced dimensionality to 53
+[TEST] Testing LGBM
+[LightGBM] [Info] Number of positive: 399833, number of negative: 400167
+[LightGBM] [Info] Auto-choosing col-wise multi-threading, the overhead of testing was 0.323086 seconds.
+You can set `force_col_wise=true` to remove the overhead.
+[LightGBM] [Info] Total Bins 13515
+[LightGBM] [Info] Number of data points in the train set: 800000, number of used features: 53
+[LightGBM] [Info] [binary:BoostFromScore]: pavg=0.499791 -> initscore=-0.000835
+[LightGBM] [Info] Start training from score -0.000835
+[RESULT] full dim auc-score (dim=81): 0.71345124843805
+[RESULT] reduced dim auc-score (dim=53): 0.6768909838256394
+[STAT] dim diff proportion: -34.5679012345679%
+[STAT] auc diff proportion: -5.1244236648897195%
+[INFO] Pipeline 6 |pca lgbm| finished.
+[INFO] Starting Pipeline 7: |pca randomforest|
+[PIPELINE] Using preprocessor: none
+[PIPELINE] Using dimensionality reduction method: pca
+[PIPELINE] Using processor: randomforest
+[TEST] Testing Random Forest
+[REDUCE] Starting PCA
+[REDUCE] PCA reduced dimensionality to 53
+[TEST] Testing Random Forest
+[RESULT] full dim auc-score (dim=81): 0.7029991872199675
+[RESULT] reduced dim auc-score (dim=53): 0.6705502789220112
+[STAT] dim diff proportion: -34.5679012345679%
+[STAT] auc diff proportion: -4.615781765876068%
+[INFO] Pipeline 7 |pca randomforest| finished.
+[INFO] Starting Pipeline 8: |pca mlp|
+[PIPELINE] Using preprocessor: none
+[PIPELINE] Using dimensionality reduction method: pca
+[PIPELINE] Using processor: mlp
+[TEST] Testing MLP
+[REDUCE] Starting PCA
+[REDUCE] PCA reduced dimensionality to 53
+[TEST] Testing MLP
+[RESULT] full dim auc-score (dim=81): 0.6991133820145353
+[RESULT] reduced dim auc-score (dim=53): 0.6954169600666785
+[STAT] dim diff proportion: -34.5679012345679%
+[STAT] auc diff proportion: -0.5287299661187068%
+[INFO] Pipeline 8 |pca mlp| finished.
+[INFO] Starting Pipeline 9: |autoencoder decisiontree|
+[PIPELINE] Using preprocessor: none
+[PIPELINE] Using dimensionality reduction method: autoencoder
+[PIPELINE] Using processor: decisiontree
+[TEST] Testing Decision Tree
+[AUTOENCODER] Fitting new weights
+31250/31250 ━━━━━━━━━━━━━━━━━━━━ 37s 1ms/step - loss: 0.7394
+[AUTOENCODER] Saving weights
+31250/31250 ━━━━━━━━━━━━━━━━━━━━ 23s 730us/step
+[TEST] Testing Decision Tree
+[RESULT] full dim auc-score (dim=81): 0.5729614934684598
+[RESULT] reduced dim auc-score (dim=53): 0.5458652157846087
+[STAT] dim diff proportion: -34.5679012345679%
+[STAT] auc diff proportion: -4.729162080303522%
+[INFO] Pipeline 9 |autoencoder decisiontree| finished.
+[INFO] Starting Pipeline 10: |autoencoder lgbm|
+[PIPELINE] Using preprocessor: none
+[PIPELINE] Using dimensionality reduction method: autoencoder
+[PIPELINE] Using processor: lgbm
+[TEST] Testing LGBM
+[LightGBM] [Info] Number of positive: 399833, number of negative: 400167
+[LightGBM] [Info] Auto-choosing row-wise multi-threading, the overhead of testing was 0.225499 seconds.
+You can set `force_row_wise=true` to remove the overhead.
+And if memory is not enough, you can set `force_col_wise=true`.
+[LightGBM] [Info] Total Bins 5214
+[LightGBM] [Info] Number of data points in the train set: 800000, number of used features: 75
+[LightGBM] [Info] [binary:BoostFromScore]: pavg=0.499791 -> initscore=-0.000835
+[LightGBM] [Info] Start training from score -0.000835
+[AUTOENCODER] Using loaded weights
+31250/31250 ━━━━━━━━━━━━━━━━━━━━ 23s 736us/step
+[TEST] Testing LGBM
+[LightGBM] [Info] Number of positive: 399833, number of negative: 400167
+[LightGBM] [Info] Auto-choosing col-wise multi-threading, the overhead of testing was 0.337989 seconds.
+You can set `force_col_wise=true` to remove the overhead.
+[LightGBM] [Info] Total Bins 13515
+[LightGBM] [Info] Number of data points in the train set: 800000, number of used features: 53
+[LightGBM] [Info] [binary:BoostFromScore]: pavg=0.499791 -> initscore=-0.000835
+[LightGBM] [Info] Start training from score -0.000835
+[RESULT] full dim auc-score (dim=81): 0.71345124843805
+[RESULT] reduced dim auc-score (dim=53): 0.6748753185450127
+[STAT] dim diff proportion: -34.5679012345679%
+[STAT] auc diff proportion: -5.40694686252089%
+[INFO] Pipeline 10 |autoencoder lgbm| finished.
+[INFO] Starting Pipeline 11: |autoencoder randomforest|
+[PIPELINE] Using preprocessor: none
+[PIPELINE] Using dimensionality reduction method: autoencoder
+[PIPELINE] Using processor: randomforest
+[TEST] Testing Random Forest
+[AUTOENCODER] Using loaded weights
+31250/31250 ━━━━━━━━━━━━━━━━━━━━ 23s 733us/step
+[TEST] Testing Random Forest
+[RESULT] full dim auc-score (dim=81): 0.7029991872199675
+[RESULT] reduced dim auc-score (dim=53): 0.6692395000195801
+[STAT] dim diff proportion: -34.5679012345679%
+[STAT] auc diff proportion: -4.802237017355754%
+[INFO] Pipeline 11 |autoencoder randomforest| finished.
+[INFO] Starting Pipeline 12: |autoencoder mlp|
+[PIPELINE] Using preprocessor: none
+[PIPELINE] Using dimensionality reduction method: autoencoder
+[PIPELINE] Using processor: mlp
+[TEST] Testing MLP
+[AUTOENCODER] Using loaded weights
+31250/31250 ━━━━━━━━━━━━━━━━━━━━ 23s 734us/step
+[TEST] Testing MLP
+[RESULT] full dim auc-score (dim=81): 0.6991133820145353
+[RESULT] reduced dim auc-score (dim=53): 0.6944243808269752
+[STAT] dim diff proportion: -34.5679012345679%
+[STAT] auc diff proportion: -0.6707068278465045%
+[INFO] Pipeline 12 |autoencoder mlp| finished.
+[INFO] Starting Pipeline 13: |hcluster decisiontree|
+[PIPELINE] Using preprocessor: none
+[PIPELINE] Using dimensionality reduction method: hcluster
+[PIPELINE] Using processor: decisiontree
+[TEST] Testing Decision Tree
+[REDUCE] Starting Agglomerative Hierarchical Clustering
+[REDUCE] Agglomerative clustering grouped features into 53 clusters
+[REDUCE] Clustering reduced dimensionality to 53
+[TEST] Testing Decision Tree
+[RESULT] full dim auc-score (dim=81): 0.5729614934684598
+[RESULT] reduced dim auc-score (dim=53): 0.5685581999423279
+[STAT] dim diff proportion: -34.5679012345679%
+[STAT] auc diff proportion: -0.7685147390056294%
+[INFO] Pipeline 13 |hcluster decisiontree| finished.
+[INFO] Starting Pipeline 14: |hcluster lgbm|
+[PIPELINE] Using preprocessor: none
+[PIPELINE] Using dimensionality reduction method: hcluster
+[PIPELINE] Using processor: lgbm
+[TEST] Testing LGBM
+[LightGBM] [Info] Number of positive: 399833, number of negative: 400167
+[LightGBM] [Info] Auto-choosing row-wise multi-threading, the overhead of testing was 0.224498 seconds.
+You can set `force_row_wise=true` to remove the overhead.
+And if memory is not enough, you can set `force_col_wise=true`.
+[LightGBM] [Info] Total Bins 5214
+[LightGBM] [Info] Number of data points in the train set: 800000, number of used features: 75
+[LightGBM] [Info] [binary:BoostFromScore]: pavg=0.499791 -> initscore=-0.000835
+[LightGBM] [Info] Start training from score -0.000835
+[REDUCE] Starting Agglomerative Hierarchical Clustering
+[REDUCE] Agglomerative clustering grouped features into 53 clusters
+[REDUCE] Clustering reduced dimensionality to 53
+[TEST] Testing LGBM
+[LightGBM] [Info] Number of positive: 399833, number of negative: 400167
+[LightGBM] [Info] Auto-choosing row-wise multi-threading, the overhead of testing was 0.155908 seconds.
+You can set `force_row_wise=true` to remove the overhead.
+And if memory is not enough, you can set `force_col_wise=true`.
+[LightGBM] [Info] Total Bins 4574
+[LightGBM] [Info] Number of data points in the train set: 800000, number of used features: 49
+[LightGBM] [Info] [binary:BoostFromScore]: pavg=0.499791 -> initscore=-0.000835
+[LightGBM] [Info] Start training from score -0.000835
+[RESULT] full dim auc-score (dim=81): 0.71345124843805
+[RESULT] reduced dim auc-score (dim=53): 0.7094315327272613
+[STAT] dim diff proportion: -34.5679012345679%
+[STAT] auc diff proportion: -0.5634184143049639%
+[INFO] Pipeline 14 |hcluster lgbm| finished.
+[INFO] Starting Pipeline 15: |hcluster randomforest|
+[PIPELINE] Using preprocessor: none
+[PIPELINE] Using dimensionality reduction method: hcluster
+[PIPELINE] Using processor: randomforest
+[TEST] Testing Random Forest
+[REDUCE] Starting Agglomerative Hierarchical Clustering
+[REDUCE] Agglomerative clustering grouped features into 53 clusters
+[REDUCE] Clustering reduced dimensionality to 53
+[TEST] Testing Random Forest
+[RESULT] full dim auc-score (dim=81): 0.7029991872199675
+[RESULT] reduced dim auc-score (dim=53): 0.7017148964185959
+[STAT] dim diff proportion: -34.5679012345679%
+[STAT] auc diff proportion: -0.18268738068537035%
+[INFO] Pipeline 15 |hcluster randomforest| finished.
+[INFO] Starting Pipeline 16: |hcluster mlp|
+[PIPELINE] Using preprocessor: none
+[PIPELINE] Using dimensionality reduction method: hcluster
+[PIPELINE] Using processor: mlp
+[TEST] Testing MLP
+[REDUCE] Starting Agglomerative Hierarchical Clustering
+[REDUCE] Agglomerative clustering grouped features into 53 clusters
+[REDUCE] Clustering reduced dimensionality to 53
+[TEST] Testing MLP
+[RESULT] full dim auc-score (dim=81): 0.6991133820145353
+[RESULT] reduced dim auc-score (dim=53): 0.6940289798111592
+[STAT] dim diff proportion: -34.5679012345679%
+[STAT] auc diff proportion: -0.7272643228091472%
+[INFO] Pipeline 16 |hcluster mlp| finished.
