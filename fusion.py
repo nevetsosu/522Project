@@ -17,4 +17,5 @@ def fusion(prob_predictions, y, weights=None, **kwargs):
 
     auc_fused = roc_auc_score(y, fused_probs)
     print(f"[FUSION] AUC after fusion: {auc_fused:.4f}")
-    return auc_fused
+    print("bug")
+    return auc_fused, fused_probs

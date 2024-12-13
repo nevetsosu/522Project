@@ -6,7 +6,7 @@ from reduce import autoencode, pca, lda, cluster_reduce
 from preprocess import default_preprocess
 from process import DTree, LGBM, RForest, MLP
 from tsne import display_tsne
-from fusion import fusion
+
 
 PREPROCESSORS = {
     'default': default_preprocess,
