@@ -6,6 +6,7 @@ from reduce import autoencode, pca, lda, cluster_reduce
 from preprocess import default_preprocess
 from process import DTree, LGBM, RForest, MLP
 from tsne import display_tsne
+from fusion import fusion
 
 PREPROCESSORS = {
     'default': default_preprocess,
@@ -47,13 +48,13 @@ def pipeline(X, Y, test_size, preprocess: str, dim_reduce: str, process: str, sh
     # run pipeline
     X = preprocessor(X)
     dim_1 = X.shape[1]
-    auc_1 = processor(X, Y, test_size=test_size)        # pre-dimension reduction results
+    auc_1, y1_prob_pred = processor(X, Y, test_size=test_size)        # pre-dimension reduction results
     X = dim_reducer(X, Y)
     if show_tsne: display_tsne(X, Y)
     dim_2 = X.shape[1]
-    auc_2 = processor(X, Y, test_size=test_size)        # post-dimension reduction results
+    auc_2, y2_prob_pred = processor(X, Y, test_size=test_size)        # post-dimension reduction results
 
-    return (dim_1, auc_1), (dim_2, auc_2)
+    return (dim_1, auc_1, y1_prob_pred), (dim_2, auc_2, y2_prob_pred)
 
 def fail():
     print(f"{__file__}  dim_reduce1 process1 [dim_reduce2] [process2]... [show_tsne(true/false)]")
@@ -74,6 +75,7 @@ def main():
     show_tsne = False
     dim_methods = []
     processors = []
+    predictions = []
     all = False
 
     # get parameters
@@ -132,7 +134,7 @@ def main():
         print(f'[INFO] Starting Pipeline {i}: |{dim_reduce} {process}|')
 
         # construct and run pipeline
-        (dim_1, auc_1), (dim_2, auc_2) = pipeline(X, Y,
+        (dim_1, auc_1, _), (dim_2, auc_2, _) = pipeline(X, Y,
             test_size=TEST_SIZE,
             preprocess='none',
             dim_reduce=dim_reduce,

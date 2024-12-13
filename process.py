@@ -17,7 +17,7 @@ def LGBM(X, Y, test_size, **kwargs):
     y_pred_scaled = lgb_model_scaled.predict_proba(X_val)[:, 1]
     auc_scaled = roc_auc_score(y_val, y_pred_scaled)
 
-    return auc_scaled
+    return auc_scaled, y_pred_scaled
 
 def DTree(X, Y, test_size, **kwargs):
     print("[TEST] Testing Decision Tree")
@@ -30,7 +30,7 @@ def DTree(X, Y, test_size, **kwargs):
     # Make predictions on validation set
     y_pred_scaled = dtree_model_scaled.predict_proba(X_val)[:, 1]
     auc_scaled = roc_auc_score(y_val, y_pred_scaled)
-    return auc_scaled
+    return auc_scaled, y_pred_scaled
 
 def RForest(X, Y, test_size, n_estimators=100, **kwargs):
     print("[TEST] Testing Random Forest")
@@ -43,7 +43,7 @@ def RForest(X, Y, test_size, n_estimators=100, **kwargs):
     # Make predictions on validation set
     y_pred_scaled = rf_model_scaled.predict_proba(X_val)[:, 1]
     auc_scaled = roc_auc_score(y_val, y_pred_scaled)
-    return auc_scaled
+    return auc_scaled, y_pred_scaled
 
 
 def MLP(X, Y, test_size, hidden_layer_sizes=(100,), **kwargs):
@@ -57,4 +57,4 @@ def MLP(X, Y, test_size, hidden_layer_sizes=(100,), **kwargs):
     # Make predictions on validation set
     y_pred_scaled = mlp_model_scaled.predict_proba(X_val)[:, 1]
     auc_scaled = roc_auc_score(y_val, y_pred_scaled)
-    return auc_scaled
+    return auc_scaled, y_pred_scaled
